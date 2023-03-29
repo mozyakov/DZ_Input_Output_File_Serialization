@@ -14,18 +14,24 @@ public class Main {
 
         while(true) {
             showPrice();
-            System.out.println("Выберите товар через кол-во и пробел или введите 'end'");
+            System.out.println("Выбери товар и через пробел его кол-во или введи 'end'");
             String input = scanner.nextLine(); //юзер вводит данные
-            if (input.equals("end")) {
+            if ("end".equals(input)) {
                 break;
             }
-
             String[] parts = input.split(" ");
-
+            int productNumber = Integer.parseInt(parts[0]) - 1; //номер товара
+            int productCount = Integer.parseInt(parts[1]); //кол-во товара
+            basket.addToCart(productNumber, productCount);
         }
 
+        basket.printCart();
+    }
 
-
-
+    public static void showPrice() { //содержимое этого метода можно положить в while, тогда этот метод не потребуется
+        System.out.println("Список возможных товаров для покупки");
+        for (int i = 0; i < products.length; i++) {
+            System.out.println(products[i]  + " " + prices[i] + "руб/шт");
+        }
     }
 }
