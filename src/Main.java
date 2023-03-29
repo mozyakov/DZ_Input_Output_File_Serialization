@@ -1,8 +1,7 @@
-import java.util.Scanner;
+import java.util.*;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
@@ -14,7 +13,7 @@ public class Main {
 
         while(true) {
             showPrice();
-            System.out.println("Выбери товар и через пробел его кол-во или введи 'end'");
+            System.out.println("Выбери товар и через пробел выбери его кол-во или введи 'end'");
             String input = scanner.nextLine(); //юзер вводит данные
             if ("end".equals(input)) {
                 break;
@@ -34,4 +33,7 @@ public class Main {
             System.out.println(products[i]  + " " + prices[i] + "руб/шт");
         }
     }
+
+
+
 }
