@@ -1,8 +1,7 @@
 import java.io.*;
 import java.util.Arrays;
 
-public class Basket implements Serializable {
-    //private static final long serialVersionUID = 1L;
+public class Basket {
     private String[] goods;
     private int[] prices;
     private int[] quantities;
