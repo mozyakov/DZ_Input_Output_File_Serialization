@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.Arrays;
+
 public class Basket implements Serializable {
     //private static final long serialVersionUID = 1L;
     private String[] goods;
@@ -26,4 +28,49 @@ public class Basket implements Serializable {
         }
         System.out.printf("Итого: %dp", totalPrice);
     }
+
+    public void saveTxt(File textFile) throws FileNotFoundException {
+        try(PrintWriter out = new PrintWriter(textFile)) {
+            for (String good : goods) { //проход по товарам
+                out.print(good + " ");
+            }
+            out.println();
+            for (int price : prices) { //проход по ценам
+                out.print(price + " ");
+            }
+            out.println();
+            for (int quantity : quantities) { //проход по кол-ву
+                out.print(quantity + " ");
+            }
+        }
+    }
+
+    public static Basket loadFromTxtFile(File textFile) {
+        Basket basket = new Basket();
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(textFile))) {
+            String goodsStr = bufferedReader.readLine();
+            String pricesStr = bufferedReader.readLine();
+            String quantitiesStr = bufferedReader.readLine();
+
+            basket.goods = goodsStr.split(" ");
+            basket.prices = Arrays.stream(pricesStr.split(" "))
+                    .map(Integer::parseInt)
+                    .mapToInt(Integer::intValue)
+                    .toArray();
+            basket.quantities = Arrays.stream(quantitiesStr.split(" "))
+                    .map(Integer::parseInt)
+                    .mapToInt(Integer::intValue)
+                    .toArray();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return basket;
+    }
+
 }
+
+
+
+
+

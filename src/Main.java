@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.io.FileWriter;
 import java.io.File;
@@ -8,8 +9,15 @@ public class Main {
     static String[] products = {"Хлеб", "Квас", "Мясо"};
     static int[] prices = {10, 20, 30};
 
-    public static void main(String[] args) {
-        Basket basket = new Basket(products, prices);
+    static File saveFile = new File("basket.txt");
+
+    public static void main(String[] args) throws FileNotFoundException {
+        Basket basket = null;
+        if (saveFile.exists()) {
+            basket = Basket.loadFromTxtFile(saveFile);
+        } else {
+            basket = new Basket(products, prices);
+        }
 
         while(true) {
             showPrice();
@@ -22,6 +30,7 @@ public class Main {
             int productNumber = Integer.parseInt(parts[0]) - 1; //номер товара
             int productCount = Integer.parseInt(parts[1]); //кол-во товара
             basket.addToCart(productNumber, productCount);
+            basket.saveTxt(saveFile);
         }
 
         basket.printCart();
