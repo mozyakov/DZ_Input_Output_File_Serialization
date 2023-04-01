@@ -41,10 +41,13 @@ public class Basket {
             //for (int quantity : quantities) { //проход по кол-ву
             //    out.print(quantity + " ");
             //}
+
+            //собрать строку, записать её в файл
             out.println(String.join(" ", goods));
-            out.println(String.join(" ", Arrays.stream(prices)
-                    .mapToObj(String::valueOf)
-                    .toArray(String[]::new)));
+
+            out.println(String.join(" ", Arrays.stream(prices) //преобразовать массив интов в массив строк
+                    .mapToObj(String::valueOf) //строки переводим в числа
+                    .toArray(String[]::new))); //конструктор массива строк
             out.println(String.join(" ", Arrays.stream(quantities)
                     .mapToObj(String::valueOf)
                     .toArray(String[]::new)));
