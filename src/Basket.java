@@ -31,17 +31,26 @@ public class Basket implements Serializable {
 
     public void saveTxt(File textFile) throws FileNotFoundException {
         try(PrintWriter out = new PrintWriter(textFile)) {
-            for (String good : goods) { //проход по товарам
-                out.print(good + " ");
-            }
-            out.println();
-            for (int price : prices) { //проход по ценам
-                out.print(price + " ");
-            }
-            out.println();
-            for (int quantity : quantities) { //проход по кол-ву
-                out.print(quantity + " ");
-            }
+//            for (String good : goods) { //проход по товарам
+//                out.print(good + " ");
+//            }
+//            out.println();
+//            for (int price : prices) { //проход по ценам
+//                out.print(price + " ");
+//            }
+//            out.println();
+//            for (int quantity : quantities) { //проход по кол-ву
+//                out.print(quantity + " ");
+//            }
+            //собрать строку, записать её в файл
+            out.println(String.join(" ", goods));
+
+            out.println(String.join(" ", Arrays.stream(prices) //преобразовать массив интов в массив строк
+                    .mapToObj(String::valueOf) //строки переводим в числа
+                    .toArray(String[]::new))); //конструктор массива строк
+            out.println(String.join(" ", Arrays.stream(quantities)
+                    .mapToObj(String::valueOf)
+                    .toArray(String[]::new)));
         }
     }
 
