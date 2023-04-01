@@ -30,17 +30,24 @@ public class Basket {
 
     public void saveTxt(File textFile) throws FileNotFoundException {
         try(PrintWriter out = new PrintWriter(textFile)) {
-            for (String good : goods) { //проход по товарам
-                out.print(good + " ");
-            }
-            out.println();
-            for (int price : prices) { //проход по ценам
-                out.print(price + " ");
-            }
-            out.println();
-            for (int quantity : quantities) { //проход по кол-ву
-                out.print(quantity + " ");
-            }
+            //for (String good : goods) { //проход по товарам  ниже вариант без циклов for each
+            //    out.print(good + " ");
+            //}
+            //out.println();
+            //for (int price : prices) { //проход по ценам
+            //    out.print(price + " ");
+            //}
+            //out.println();
+            //for (int quantity : quantities) { //проход по кол-ву
+            //    out.print(quantity + " ");
+            //}
+            out.println(String.join(" ", goods));
+            out.println(String.join(" ", Arrays.stream(prices)
+                    .mapToObj(String::valueOf)
+                    .toArray(String[]::new)));
+            out.println(String.join(" ", Arrays.stream(quantities)
+                    .mapToObj(String::valueOf)
+                    .toArray(String[]::new)));
         }
     }
 
